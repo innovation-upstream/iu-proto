@@ -58,9 +58,9 @@ publish_genproto_github:
 
 publish_bsr:
   stage: publish
-  entrypoint: [""]
   image:
     name: bufbuild/buf
+    entrypoint: [""]
   variables:
     BUF_TOKEN: $BSR_API_TOKEN
   script:
