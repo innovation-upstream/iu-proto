@@ -35,7 +35,7 @@ publish_genproto_github:
     # Skip host key verification prompt
     GIT_SSH_COMMAND: "/usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
   before_script:
-    - apk update && apk add git
+    - apk update && apk add git openssh
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
     - |-
       cat <<EOT >> ~/.ssh/config
@@ -60,15 +60,7 @@ publish_bsr:
   stage: publish
   image:
     name: bufbuild/buf
-    entrypoint: ["/bin/sh"]
-  before_script:
-    - \[ -d ~/.ssh \] || mkdir ~/.ssh
-    - |-
-      cat <<EOT >> ~/.netrc
-      machine buf.build
-      login zachlowden1@gmail.com
-      password $BSR_API_TOKEN
-      EOT
-  script:
-    - buf push
+    command: push
+  variables:
+    BUF_TOKEN: $BSR_API_TOKEN
 
