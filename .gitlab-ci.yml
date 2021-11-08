@@ -33,7 +33,7 @@ publish_genproto_github:
     name: nixos/nix
   variables:
     # Skip host key verification prompt
-    GIT_SSH_COMMAND: "/usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+    GIT_SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
     GIT_COMMITTER_NAME: "Innovation Upstream Bot"
     GIT_COMMITTER_EMAIL: "zach+ci@innovationupstream.com"
   before_script:
