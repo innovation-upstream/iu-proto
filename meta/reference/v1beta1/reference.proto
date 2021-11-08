@@ -10,3 +10,8 @@ enum ReferenceType {
   External = 2;
   Owner = 3;
 }
+
+message Reference {
+  ReferenceType reference_type = 1;
+  repeated string reference_ids = 2;
+}
