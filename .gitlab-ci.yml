@@ -27,10 +27,10 @@ buf_generate:
       - pb
     expire_in: 1 day
 
-publish_genproto:
+publish_genproto_github:
   stage: publish
   image:
-    name: nixos/nix
+    name: alpine/git
   variables:
     # Skip host key verification prompt
     GIT_SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
@@ -42,7 +42,6 @@ publish_genproto:
         Hostname github.com
         IdentityFile=$GITHUB_IU_PROTO_DEPLOY_SSH_KEY_PRIVATE
       EOT
-    - nix-env -iA nixpkgs.git nixpkgs.ssh
   script:
     - mv pb/go.innovationupstream.dev/go-genproto downstream
     - cd downstream/go-genproto
