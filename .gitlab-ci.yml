@@ -49,10 +49,9 @@ publish_genproto_github:
     - cd downstream/go-genproto
     - git init
     - git remote add origin git@github.com-innovation-upstream-iu-proto:innovation-upstream/go-genproto.git
-    - git pull
     - git checkout main
     - git commit -m $CI_COMMIT_MESSAGE
-    - git push
+    - git push -u origin main
   needs:
     - buf_generate
 
