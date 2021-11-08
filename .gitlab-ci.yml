@@ -40,6 +40,8 @@ publish_genproto:
         IdentityFile=$GITHUB_IU_PROTO_DEPLOY_SSH_KEY_PRIVATE
       EOT
     - nix-env -iA nixpkgs.git
+    - cat ~/.ssh/config
+    - cat $GITHUB_IU_PROTO_DEPLOY_SSH_KEY_PRIVATE
   script:
     - mv pb/go.innovationupstream.dev/go-genproto downstream
     - cd downstream/go-genproto
