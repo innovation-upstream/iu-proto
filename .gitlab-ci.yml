@@ -10,6 +10,8 @@ workflow:
       when: always
     - when: never
 
+# TODO: check breaking
+
 buf_generate:
   stage: generate
   image:
@@ -31,7 +33,8 @@ publish_genproto:
     name: nixos/nix
   before_script:
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
-    - cat <<EOT >> ~/.ssh/config
+    - >
+      cat <<EOT >> ~/.ssh/config
       Host github.com-innovation-upstream-iu-proto
         Hostname github.com
         IdentityFile=$GITHUB_IU_PROTO_DEPLOY_SSH_KEY_PRIVATE
