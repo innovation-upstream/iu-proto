@@ -1,0 +1,11 @@
+version: v1
+name: buf.build/innovation-upstream/iu-proto
+build:
+  roots:
+    - .
+lint:
+  use:
+    - DEFAULT
+breaking:
+  use:
+    - FILE
