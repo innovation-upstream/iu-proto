@@ -30,16 +30,16 @@ buf_generate:
 publish_genproto_github:
   stage: publish
   image:
-    name: alpine
+    name: nixos/nix
   variables:
     # Skip host key verification prompt
     GIT_SSH_COMMAND: "/usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-    GIT_AUTHOR_NAME: "Innovation Upstream Bot"
-    GIT_AUTHOR_EMAIL: "zach+ci@innovationupstream.com"
     GIT_COMMITTER_NAME: "Innovation Upstream Bot"
     GIT_COMMITTER_EMAIL: "zach+ci@innovationupstream.com"
   before_script:
-    - apk update && apk add git openssh
+    - nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+    - nix-channel --update
+    - nix-env -iA nixpkgs.git nixpkgs.openssh nixpkgs.bazel_4 nixpkgs.go_1_17
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
     - |-
       cat <<EOT >> ~/.ssh/config
@@ -54,6 +54,8 @@ publish_genproto_github:
     - git init --initial-branch main
     - git remote add origin git@github.com-innovation-upstream-iu-proto:innovation-upstream/go-genproto.git
     - git pull origin main
+    - go mod tidy
+    - bazel run //:gazelle
     - git add .
     - git commit -m "$CI_COMMIT_MESSAGE"
     - git push -u origin main
