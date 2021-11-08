@@ -30,12 +30,12 @@ buf_generate:
 publish_genproto_github:
   stage: publish
   image:
-    name: ubuntu
+    name: alpine
   variables:
     # Skip host key verification prompt
     GIT_SSH_COMMAND: "/usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
   before_script:
-    - apt update && apt install -y git
+    - apk update && apk add git
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
     - |-
       cat <<EOT >> ~/.ssh/config
@@ -43,6 +43,7 @@ publish_genproto_github:
         Hostname github.com
         IdentityFile=$GITHUB_IU_PROTO_DEPLOY_SSH_KEY_PRIVATE
       EOT
+    - chmod 000 ~/.ssh/config
   script:
     - mv pb/go.innovationupstream.dev/go-genproto downstream
     - cd downstream/go-genproto
