@@ -5,7 +5,7 @@ package innovationupstream.meta.reference.v1beta1;
 option go_package = "go.innovationupstream.dev/genproto/meta/reference/v1beta1;reference";
 
 enum ReferenceType {
-  None = 0;
+  ReferenceType_UNSPECIFIED = 0;
   Internal = 1;
   External = 2;
   Owner = 3;

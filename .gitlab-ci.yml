@@ -38,7 +38,7 @@ publish_genproto_github:
     GIT_COMMITTER_EMAIL: "zach+ci@innovationupstream.com"
   before_script:
     - apt update
-    - apt install -y openssh git golang-go curl
+    - apt install -y ssh git golang-go curl
     - curl -OL https://golang.org/dl/go1.17.3.linux-amd64.tar.gz
     - rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.3.linux-amd64.tar.gz
     - export PATH=$PATH:/usr/local/go/bin
