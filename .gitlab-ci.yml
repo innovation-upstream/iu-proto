@@ -60,9 +60,8 @@ publish_bsr:
   stage: publish
   image:
     name: bufbuild/buf
-    command: push
   variables:
     BUF_TOKEN: $BSR_API_TOKEN
   script:
-    - echo hi
+    - push
 
