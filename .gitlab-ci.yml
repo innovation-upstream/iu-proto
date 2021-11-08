@@ -43,7 +43,7 @@ publish_genproto_github:
         Hostname github.com
         IdentityFile=$GITHUB_IU_PROTO_DEPLOY_SSH_KEY_PRIVATE
       EOT
-    - chmod 000 ~/.ssh/config
+    - chmod 0600 $GITHUB_IU_PROTO_DEPLOY_SSH_KEY_PRIVATE
   script:
     - mv pb/go.innovationupstream.dev/go-genproto downstream
     - cd downstream/go-genproto
@@ -58,10 +58,11 @@ publish_genproto_github:
 
 publish_bsr:
   stage: publish
+  entrypoint: [""]
   image:
     name: bufbuild/buf
   variables:
     BUF_TOKEN: $BSR_API_TOKEN
   script:
-    - push
+    - buf push
 
