@@ -33,7 +33,7 @@ publish_genproto:
     name: nixos/nix
   before_script:
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
-    - >
+    - |-
       cat <<EOT >> ~/.ssh/config
       Host github.com-innovation-upstream-iu-proto
         Hostname github.com
