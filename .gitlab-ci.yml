@@ -37,7 +37,7 @@ publish_genproto_github:
     GIT_COMMITTER_NAME: "Innovation Upstream Bot"
     GIT_COMMITTER_EMAIL: "zach+ci@innovationupstream.com"
   before_script:
-    - sudo add-apt-repository ppa:longsleep/golang-backports
+    - add-apt-repository ppa:longsleep/golang-backports
     - apt update
     - apt install -y openssh git golang-go
     - npm i -g @bazel/bazelisk
