@@ -49,11 +49,9 @@ publish_genproto_github:
       EOT
     - chmod 0600 $GITHUB_IU_PROTO_DEPLOY_SSH_KEY_PRIVATE
   script:
-    - mv pb/go.innovationupstream.dev/go-genproto downstream
-    - cd downstream/go-genproto
-    - git init --initial-branch main
-    - git remote add origin git@github.com-innovation-upstream-iu-proto:innovation-upstream/go-genproto.git
-    - git pull origin main
+    - cd downstream
+    - git clone -b main --single-branch git@github.com-innovation-upstream-iu-proto:innovation-upstream/go-genproto.git go-genproto
+    - mv $CI_BUILDS_DIR/pb/go.innovationupstream.dev/go-genproto/* $CI_BUILDS_DIR/downstream/go-genproto
     - go mod tidy
     - bazel run //:gazelle
     - git add .
