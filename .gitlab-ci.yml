@@ -39,7 +39,9 @@ publish_genproto_github:
   before_script:
     - apt update
     - apt install -y openssh git golang-go curl
-    - curl -LO https://get.golang.org/$(uname)/go_installer && chmod +x go_installer && ./go_installer && rm go_installer
+    - curl -OL https://golang.org/dl/go1.17.3.linux-amd64.tar.gz
+    - rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.3.linux-amd64.tar.gz
+    - export PATH=$PATH:/usr/local/go/bin
     - npm i -g @bazel/bazelisk
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
     - |-
