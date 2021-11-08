@@ -1,5 +1,5 @@
 version: v1
 plugins:
   - name: go
-    out: .
-    opt: paths=import,module=gitlab.innovationup.stream/innovation-upstream/common-proto
+    out: pb
+    opt: paths=import

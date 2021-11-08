@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package innovationupstream.meta.reference.v1beta1;
 
-option go_package = "go.innovationupstream.dev/iu-proto/meta/reference/v1beta1;reference";
+option go_package = "go.innovationupstream.dev/go-genproto/meta/reference/v1beta1;reference";
 
 enum ReferenceType {
   None = 0;
