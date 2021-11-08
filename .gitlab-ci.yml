@@ -30,12 +30,12 @@ buf_generate:
 publish_genproto_github:
   stage: publish
   image:
-    name: alpine/git
-    entrypoint: ["/bin/sh"]
+    name: ubuntu
   variables:
     # Skip host key verification prompt
     GIT_SSH_COMMAND: "/usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
   before_script:
+    - apt update && apt install -y git
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
     - |-
       cat <<EOT >> ~/.ssh/config
