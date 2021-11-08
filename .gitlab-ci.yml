@@ -51,7 +51,7 @@ publish_genproto_github:
   script:
     - cd downstream
     - git clone -b main --single-branch git@github.com-innovation-upstream-iu-proto:innovation-upstream/go-genproto.git go-genproto
-    - mv $CI_BUILDS_DIR/pb/go.innovationupstream.dev/go-genproto/* $CI_BUILDS_DIR/downstream/go-genproto
+    - mv $CI_PROJECT_DIR/pb/go.innovationupstream.dev/go-genproto/* $CI_PROJECT_DIR/downstream/go-genproto
     - go mod tidy
     - bazel run //:gazelle
     - git add .
