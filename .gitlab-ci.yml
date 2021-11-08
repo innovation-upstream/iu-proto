@@ -42,7 +42,7 @@ publish_genproto:
         Hostname github.com
         IdentityFile=$GITHUB_IU_PROTO_DEPLOY_SSH_KEY_PRIVATE
       EOT
-    - nix-env -iA nixpkgs.git
+    - nix-env -iA nixpkgs.git nixpkgs.ssh
   script:
     - mv pb/go.innovationupstream.dev/go-genproto downstream
     - cd downstream/go-genproto
