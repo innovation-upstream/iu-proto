@@ -39,7 +39,7 @@ publish_genproto_github:
   before_script:
     - nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
     - nix-channel --update
-    - nix-env -iA nixpkgs.git nixpkgs.openssh nixpkgs.bazel_4 nixpkgs.go_1_17
+    - nix-env -iA nixpkgs.git nixpkgs.openssh nixpkgs.go_1_17
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
     - |-
       cat <<EOT >> ~/.ssh/config
@@ -54,7 +54,7 @@ publish_genproto_github:
     - cp -a $CI_PROJECT_DIR/pb/go.innovationupstream.dev/go-genproto/* $CI_PROJECT_DIR/downstream/go-genproto
     - cd go-genproto
     - go mod tidy
-    - bazel run //:gazelle
+    - nix-shell --command 'bazel run //:gazelle' -p bazel_4
     - git add .
     - git commit -m "$CI_COMMIT_MESSAGE"
     - git push -u origin main
