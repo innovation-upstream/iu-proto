@@ -34,6 +34,8 @@ publish_genproto_github:
   variables:
     # Skip host key verification prompt
     GIT_SSH_COMMAND: "/usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+    GIT_AUTHOR_NAME: "Innovation Upstream Bot"
+    GIT_AUTHOR_EMAIL: "zach+ci@innovationupstream.com"
   before_script:
     - apk update && apk add git openssh
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
