@@ -31,6 +31,9 @@ publish_genproto:
   stage: publish
   image:
     name: nixos/nix
+  variables:
+    # Skip host key verification prompt
+    GIT_SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
   before_script:
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
     - |-
@@ -40,8 +43,6 @@ publish_genproto:
         IdentityFile=$GITHUB_IU_PROTO_DEPLOY_SSH_KEY_PRIVATE
       EOT
     - nix-env -iA nixpkgs.git
-    - cat ~/.ssh/config
-    - cat $GITHUB_IU_PROTO_DEPLOY_SSH_KEY_PRIVATE
   script:
     - mv pb/go.innovationupstream.dev/go-genproto downstream
     - cd downstream/go-genproto
