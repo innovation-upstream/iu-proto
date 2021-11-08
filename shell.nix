@@ -2,7 +2,9 @@
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    bazel_4
     (callPackage ./nix/buf {})
+    bazel_4
+    protoc-gen-go
+    protoc-gen-go-grpc
   ];
 }

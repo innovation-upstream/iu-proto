@@ -3,3 +3,6 @@ plugins:
   - name: go
     out: pb
     opt: paths=import
+  - name: go-grpc
+    out: pb
+    opt: require_unimplemented_servers=false,paths=import
