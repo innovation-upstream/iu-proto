@@ -47,9 +47,10 @@ publish_genproto_github:
   script:
     - mv pb/go.innovationupstream.dev/go-genproto downstream
     - cd downstream/go-genproto
-    - git init
+    - git init --initial-branch main
     - git remote add origin git@github.com-innovation-upstream-iu-proto:innovation-upstream/go-genproto.git
-    - git checkout main
+    - git pull origin main
+    - git add .
     - git commit -m $CI_COMMIT_MESSAGE
     - git push -u origin main
   needs:
