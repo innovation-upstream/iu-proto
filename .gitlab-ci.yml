@@ -34,7 +34,7 @@ publish_genproto_github:
     entrypoint: ["/bin/sh"]
   variables:
     # Skip host key verification prompt
-    GIT_SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+    GIT_SSH_COMMAND: "/usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
   before_script:
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
     - |-
@@ -54,3 +54,19 @@ publish_genproto_github:
     - git push
   needs:
     - buf_generate
+
+publish_bsr:
+  stage: publish
+  image:
+    name: bufbuild/buf
+  before_script:
+    - \[ -d ~/.ssh \] || mkdir ~/.ssh
+    - |-
+      cat <<EOT >> ~/.netrc
+      machine buf.build
+      login zachlowden1@gmail.com
+      password $BSR_API_TOKEN
+      EOT
+  script:
+    - buf push
+
