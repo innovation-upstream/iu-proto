@@ -30,16 +30,17 @@ buf_generate:
 publish_genproto_github:
   stage: publish
   image:
-    name: nixos/nix
+    name: node:17-buster-slim
   variables:
     # Skip host key verification prompt
     GIT_SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
     GIT_COMMITTER_NAME: "Innovation Upstream Bot"
     GIT_COMMITTER_EMAIL: "zach+ci@innovationupstream.com"
   before_script:
-    - nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-    - nix-channel --update
-    - nix-env -iA nixpkgs.git nixpkgs.openssh nixpkgs.go_1_17
+    - sudo add-apt-repository ppa:longsleep/golang-backports
+    - apt update
+    - apt install -y openssh git golang-go
+    - npm i -g @bazel/bazelisk
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
     - |-
       cat <<EOT >> ~/.ssh/config
@@ -54,7 +55,7 @@ publish_genproto_github:
     - cp -a $CI_PROJECT_DIR/pb/go.innovationupstream.dev/go-genproto/* $CI_PROJECT_DIR/downstream/go-genproto
     - cd go-genproto
     - go mod tidy
-    - nix-shell --command 'bazel run //:gazelle' -p bazel_4
+    - bazel run //:gazelle
     - git add .
     - git commit -m "$CI_COMMIT_MESSAGE"
     - git push -u origin main
