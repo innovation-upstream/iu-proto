@@ -31,7 +31,6 @@ publish_genproto:
   stage: publish
   image:
     name: nixos/nix
-    entrypoint: ["nix-shell", "-p", "git"]
   before_script:
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
     - |-
@@ -40,6 +39,7 @@ publish_genproto:
         Hostname github.com
         IdentityFile=$GITHUB_IU_PROTO_DEPLOY_SSH_KEY_PRIVATE
       EOT
+    - nix-env -iA nixpkgs.git
   script:
     - mv pb/go.innovationupstream.dev/go-genproto downstream
     - cd downstream/go-genproto
