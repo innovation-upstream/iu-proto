@@ -63,5 +63,6 @@ publish_bsr:
     command: push
   variables:
     BUF_TOKEN: $BSR_API_TOKEN
-  script: []
+  script:
+    - echo hi
 
