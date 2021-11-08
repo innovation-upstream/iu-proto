@@ -4,10 +4,7 @@ stages:
 
 workflow:
   rules:
-    - if: '($CI_PIPELINE_SOURCE == "push" || \
-     $CI_PIPELINE_SOURCE == "merge_request_event") && \
-     ($CI_COMMIT_BRANCH == "main" || \
-     $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main")'
+    - if: '($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event") && ($CI_COMMIT_BRANCH == "main" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main")'
       when: always
     - if: '$FORCE_PIPELINE == "true"'
       when: always
@@ -42,8 +39,7 @@ publish_genproto:
     - mv pb/go.innovationupstream.dev/go-genproto downstream
     - cd downstream/go-genproto
     - git init
-    - git remote add origin \
-      git@github.com-innovation-upstream-iu-proto:innovation-upstream/go-genproto.git
+    - git remote add origin git@github.com-innovation-upstream-iu-proto:innovation-upstream/go-genproto.git
     - git pull
     - git checkout main
     - git commit -m $CI_COMMIT_MESSAGE
