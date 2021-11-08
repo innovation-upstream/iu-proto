@@ -59,6 +59,7 @@ publish_bsr:
   stage: publish
   image:
     name: bufbuild/buf
+    entrypoint: ["/bin/sh"]
   before_script:
     - \[ -d ~/.ssh \] || mkdir ~/.ssh
     - |-
