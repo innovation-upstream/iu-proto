@@ -34,7 +34,7 @@ message SendTemplateEmailsRequest {
 
 message HTMLEmail {
   EmailHeader header = 1;
-  string html = 2[(transformer.map_to) = "HTML"];
+  string html = 2;
 }
 
 message SendHTMLEmailsRequest {
