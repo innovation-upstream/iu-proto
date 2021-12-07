@@ -61,7 +61,7 @@ publish_genproto_github:
     - go mod tidy
     - bazel run //:gazelle
     - git add .
-    - git commit -m "$CI_COMMIT_MESSAGE"
+    - git commit -m "$CI_COMMIT_MESSAGE" ; exit 0
     - git push -u origin main
   needs:
     - buf_generate
