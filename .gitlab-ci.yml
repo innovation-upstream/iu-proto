@@ -65,6 +65,9 @@ publish_genproto_github:
     - git push -u origin main
   needs:
     - buf_generate
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: always
 
 publish_bsr:
   stage: publish
@@ -75,4 +78,6 @@ publish_bsr:
     BUF_TOKEN: $BSR_API_TOKEN
   script:
     - buf push
+  - if: '$CI_COMMIT_BRANCH == "main"'
+    when: always
 
