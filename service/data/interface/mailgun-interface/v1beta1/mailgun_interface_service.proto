@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package innovationupstream.service.data.interface.mailgun_interface.v1beta1;
+
+option go_package = "go.innovationupstream.dev/genproto/service/data/interface/mailgun-interface/v1beta1;mailgun_interface";
+
+import "google/protobuf/empty.proto";
+
+service MailgunInterfaceRPC {
+  rpc SendTemplateEmails
+    (SendTemplateEmailsRequest)
+    returns
+    (google.protobuf.Empty);
+  rpc SendHTMLEmails
+    (SendHTMLEmailsRequest)
+    returns
+    (google.protobuf.Empty);
+}
+
+message EmailHeader {
+  string to = 1;
+  string subject = 2;
+}
+
+message TemplateEmail {
+  EmailHeader header = 1;
+  string template = 2;
+  map<string, string> template_data = 3;
+}
+
+message SendTemplateEmailsRequest {
+  repeated TemplateEmail emails = 1;
+}
+
+message HTMLEmail {
+  EmailHeader header = 1;
+  string html = 2[(transformer.map_to) = "HTML"];
+}
+
+message SendHTMLEmailsRequest {
+  repeated HTMLEmail emails = 1;
+}

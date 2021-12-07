@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package innovationupstream.service.data.utility.idempotency.v1beta1;
+
+option go_package = "go.innovationupstream.dev/genproto/service/data/utility/idempotency/v1beta1;service_routing";
+
+import "google/protobuf/empty.proto";
+import "type/nonce.proto";
+
+service IdempotencyRPC {
+  rpc Set (SetRequest) returns (google.protobuf.Empty);
+  rpc Get (GetRequest) returns (GetResponse);
+}
+
+message Idempotency {
+  option (transformer.go_struct) = "Idempotency";
+  string key = 1;
+  string category = 2;
+}
+
+message GetRequest {
+  repeated string keys = 1;
+  string category = 2;
+}
+
+message GetResponse {
+  repeated Idempotency idempotency = 1;
+}
+
+message SetRequest {
+  repeated Idempotency idempotency = 1;
+}

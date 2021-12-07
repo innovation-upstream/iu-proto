@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package innovationupstream.type.nonce.v1beta1;
+
+option go_package = "go.innovationupstream.dev/genproto/type/nonce/v1beta1;nonce";
+
+message UIDNonce {
+  string uid = 1[(transformer.map_to) = "UID"];
+  string nonce = 2;
+}
+

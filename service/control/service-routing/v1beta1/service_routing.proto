@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package innovationupstream.service.control.service_routing.v1beta1;
+
+option go_package = "go.innovationupstream.dev/genproto/service/control/service-routing/v1beta1;service_routing";
+
+import "options/annotations.proto";
+
+service ServiceRoutingRPC {
+  rpc GetEndpointForServices
+    (GetEndpointForServicesRequest)
+    returns
+    (GetEndpointForServicesResponse);
+}
+
+message GetEndpointForServicesRequest {
+  repeated string service_keys = 1;
+}
+
+message ServiceEndpoint {
+  string service_key = 1;
+  string endpoint = 2;
+}
+
+message GetEndpointForServicesResponse {
+  repeated ServiceEndpoint service_endpoints = 1;
+}
