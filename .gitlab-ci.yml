@@ -78,6 +78,7 @@ publish_bsr:
     BUF_TOKEN: $BSR_API_TOKEN
   script:
     - buf push
+  rules:
   - if: '$CI_COMMIT_BRANCH == "main"'
     when: always
 
