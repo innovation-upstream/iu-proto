@@ -1,6 +1,7 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
 # gazelle:go_naming_convention go_default_library
+# gazelle:prefix go.innovationupstream.dev/genproto
 gazelle(
     name = "gazelle",
 )

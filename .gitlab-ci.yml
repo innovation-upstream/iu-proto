@@ -59,7 +59,7 @@ publish_genproto_github:
     - cp -a $CI_PROJECT_DIR/pb/go.innovationupstream.dev/genproto/* $CI_PROJECT_DIR/downstream/go-genproto
     - cd go-genproto
     - go mod tidy
-    - bazel run //:gazelle
+    - bazel run --define ENVIRONMENT=ci //:gazelle
     - git add .
     - git commit -m "$CI_COMMIT_MESSAGE" ; exit 0
     - git push -u origin main

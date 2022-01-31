@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package innovationupstream.type.meta.reference.v1beta2;
+
+option go_package = "go.innovationupstream.dev/genproto/type/meta/reference/v1beta2;reference";
+
+enum ReferenceType {
+  ReferenceType_UNSPECIFIED = 0;
+  ReferenceType_Internal = 1;
+  ReferenceType_External = 2;
+  ReferenceType_Owner = 3;
+}
+
+message SingleReference {
+  ReferenceType reference_type = 1;
+  string id = 2;
+}
+
+message LabelledSingleReference {
+  string label = 1;
+  SingleReference reference = 2;
+}
+
+enum ReferenceMatchType {
+  ReferenceMatchType_UNSPECIFIED = 0;
+  ReferenceMatchType_ALL = 1;
+  ReferenceMatchType_ANY = 2;
+}
+
+message LabelledSingleReferenceQuery {
+  ReferenceMatchType match_type = 1;
+  repeated LabelledSingleReference labelled_single_references = 2;
+}
+
+message SingleReferenceQuery {
+  ReferenceMatchType match_type = 1;
+  repeated SingleReference single_references = 2;
+}
+
+message ReferenceQuery {
+  ReferenceMatchType match_type = 1;
+  LabelledSingleReferenceQuery labelled_single_references = 2;
+  SingleReferenceQuery single_reference_query = 3;
+}

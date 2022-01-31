@@ -21,14 +21,17 @@ http_archive(
 load(
     "@io_bazel_rules_go//go:deps.bzl",
     "go_register_toolchains",
-    "go_rules_dependencies"
+    "go_rules_dependencies",
 )
 
 go_rules_dependencies()
 
-go_register_toolchains(go_version = "1.17.1")
+load("//:go_version.bzl", "gen_imports")
+gen_imports(name = "go_sdk_imports")
+load("@go_sdk_imports//:imports.bzl", "load_go_sdk")
+load_go_sdk()
 
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 http_archive(
     name = "zlib",

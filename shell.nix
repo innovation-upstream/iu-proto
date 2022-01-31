@@ -6,5 +6,6 @@ pkgs.mkShell {
     bazel_4
     protoc-gen-go
     protoc-gen-go-grpc
+    go_1_17
   ];
 }
