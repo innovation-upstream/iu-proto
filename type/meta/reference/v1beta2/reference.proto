@@ -12,7 +12,7 @@ enum ReferenceType {
 }
 
 message SingleReference {
-  ReferenceType reference_type = 1;
+  ReferenceType type = 1;
   string id = 2;
 }
 
@@ -27,18 +27,8 @@ enum ReferenceMatchType {
   ANY = 2;
 }
 
-message LabelledSingleReferenceQuery {
-  ReferenceMatchType match_type = 1;
-  repeated LabelledSingleReference labelled_single_references = 2;
-}
-
-message SingleReferenceQuery {
-  ReferenceMatchType match_type = 1;
-  repeated SingleReference single_references = 2;
-}
-
 message ReferenceQuery {
   ReferenceMatchType match_type = 1;
-  LabelledSingleReferenceQuery labelled_single_reference_query = 2;
-  SingleReferenceQuery single_reference_query = 3;
+  repeated string ids = 2;
+  ReferenceType type = 3;
 }
