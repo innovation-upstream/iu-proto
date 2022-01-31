@@ -39,6 +39,6 @@ message SingleReferenceQuery {
 
 message ReferenceQuery {
   ReferenceMatchType match_type = 1;
-  LabelledSingleReferenceQuery labelled_single_references = 2;
+  LabelledSingleReferenceQuery labelled_single_reference_query = 2;
   SingleReferenceQuery single_reference_query = 3;
 }
