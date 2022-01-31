@@ -6,9 +6,9 @@ option go_package = "go.innovationupstream.dev/genproto/type/meta/reference/v1be
 
 enum ReferenceType {
   ReferenceType_UNSPECIFIED = 0;
-  ReferenceType_Internal = 1;
-  ReferenceType_External = 2;
-  ReferenceType_Owner = 3;
+  Internal = 1;
+  External = 2;
+  Owner = 3;
 }
 
 message SingleReference {
@@ -23,8 +23,8 @@ message LabelledSingleReference {
 
 enum ReferenceMatchType {
   ReferenceMatchType_UNSPECIFIED = 0;
-  ReferenceMatchType_ALL = 1;
-  ReferenceMatchType_ANY = 2;
+  ALL = 1;
+  ANY = 2;
 }
 
 message LabelledSingleReferenceQuery {
