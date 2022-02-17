@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package innovationupstream.type.meta.reference.v1beta3;
+
+option go_package = "go.innovationupstream.dev/genproto/type/meta/reference/v1beta3;reference";
+
+enum ReferenceType {
+  ReferenceType_UNSPECIFIED = 0;
+  Internal = 1;
+  External = 2;
+  Owner = 3;
+}
+
+message SingleReference {
+  ReferenceType type = 1;
+  string id = 2;
+}
+
+message LabelledSingleReference {
+  string label = 1;
+  SingleReference reference = 2;
+}
+
+enum ReferenceMatchType {
+  ReferenceMatchType_UNSPECIFIED = 0;
+  ALL = 1;
+  ANY = 2;
+}
+
+message ReferenceMatch {
+  ReferenceMatchType match_type = 1;
+  repeated string ids = 2;
+  ReferenceType type = 3;
+}
+
