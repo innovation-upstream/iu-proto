@@ -1,0 +1,29 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "service_routing_proto",
+    srcs = ["idempotency_service.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//type/nonce/v1beta1:nonce_proto",
+        "@com_google_protobuf//:empty_proto",
+    ],
+)
+
+go_proto_library(
+    name = "service_routing_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
+    importpath = "go.innovationupstream.dev/genproto/service/data/utility/idempotency/v1beta1",
+    proto = ":service_routing_proto",
+    visibility = ["//visibility:public"],
+    deps = ["//type/nonce/v1beta1:go_default_library"],
+)
+
+go_library(
+    name = "go_default_library",
+    embed = [":service_routing_go_proto"],
+    importpath = "go.innovationupstream.dev/genproto/service/data/utility/idempotency/v1beta1",
+    visibility = ["//visibility:public"],
+)
